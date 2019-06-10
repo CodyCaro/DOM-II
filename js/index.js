@@ -18,6 +18,7 @@ for (let i = 0; i < navLinks.length; i++) {
 
     navLinks[i].addEventListener("click", (event) => {
         event.stopPropagation();
+        event.preventDefault();
         event.target.style.fontSize = 'large';
     });
 }
