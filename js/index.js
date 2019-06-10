@@ -1,6 +1,11 @@
 // Your code goes here
+const nav = document.querySelector(".nav-container");
+
+nav.addEventListener("click", (event) => {
+    event.target.style.backgroundColor = 'blue';
+});
+
 const navLinks = document.querySelectorAll(".nav a");
-console.log(navLinks);
 
 for (let i = 0; i < navLinks.length; i++) {
     navLinks[i].addEventListener("mouseover", (event) => {
@@ -9,6 +14,11 @@ for (let i = 0; i < navLinks.length; i++) {
 
     navLinks[i].addEventListener("mouseout", (event) => {
         event.target.style.color = '#212529';
+    });
+
+    navLinks[i].addEventListener("click", (event) => {
+        event.stopPropagation();
+        event.target.style.fontSize = 'large';
     });
 }
 
