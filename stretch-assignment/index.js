@@ -4,6 +4,8 @@ class Block {
   constructor(blockElement) {
     this.blockElementProperty = blockElement;
     this.amountMoved = 0;
+    this.canMove = false;
+    this.moveAmount = 15;
 
     this.blockElementProperty.addEventListener(
       "click",
@@ -14,6 +16,8 @@ class Block {
       "mousedown",
       this.moveRight.bind(this)
     );
+
+    addEventListener("mouseup", this.stopMovement.bind(this));
   }
 
   moveToTop() {
@@ -26,16 +30,21 @@ class Block {
   }
 
   moveRight() {
-    console.log("holding");
-
-    window.setInterval(this.move.bind(this), 3000);
+    this.canMove = true;
+    window.setInterval(this.move.bind(this), 100);
   }
 
   move() {
-    console.log("moving");
-    this.amountMoved += 5;
-    console.log(this.amountMoved);
-    this.blockElementProperty.style.right = `${this.amountMoved}px`;
+    if (this.canMove) {
+      this.amountMoved -= this.moveAmount;
+
+      this.blockElementProperty.style.position = "relative";
+      this.blockElementProperty.style.right = `${this.amountMoved}px`;
+    }
+  }
+
+  stopMovement() {
+    this.canMove = false;
   }
 }
 
